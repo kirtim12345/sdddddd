@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
             bestScore = score;
             bestName = name;
             SaveGameInfo();
-            MainManager.Instance.BestScoreText.text = "melhor pontuação : " + bestName + " : " + bestScore;
+            MainManager.Instance.BestScoreText.text = "melhor pontuação : " + bestName + " : " + bestScore;   // substituir a melhor pontuação e o melhor nome
         }
         Debug.Log("Pontuação: " + score + "  Jogador: " + name);
     }
@@ -51,14 +51,14 @@ public class GameManager : MonoBehaviour {
             name = nameField.text;
             SceneManager.LoadScene(1);
         } else {
-            Debug.LogWarning("METE O TEU NOME BOT");
+          Debug.LogWarning("METE O TEU NOME BOT");           //Para escrever o nome, caso não metas o nome, avisa-te para meter o nome
         }
     }
 
     public void Exit() {
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
-#else
+#else                                                         //sair
     Application.Quit();
 #endif
     }
@@ -72,14 +72,14 @@ public class GameManager : MonoBehaviour {
     public void SaveGameInfo() {
         SaveData data = new SaveData();
         data.name = bestName;
-        data.bestScore = bestScore;
+        data.bestScore = bestScore;                                 //salvar a informação 
 
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(Application.persistentDataPath + "/savefile.json", json);
     }
 
     public void LoadGameInfo() {
-        string path = Application.persistentDataPath + "/savefile.json";
+        string path = Application.persistentDataPath + "/savefile.json"; //dar load a informação
 
         if(File.Exists(path)) {
             string json = File.ReadAllText(path);
